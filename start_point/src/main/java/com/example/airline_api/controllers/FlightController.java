@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/flights")
@@ -28,6 +29,18 @@ public class FlightController {
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
+    //   Display details of a specific flight
+
+    @GetMapping("/{flightId}")
+    public ResponseEntity<Optional<Flight>> getFlightDetails(@PathVariable("flightId") Long flightId) {
+        Optional<Flight> flight = flightService.getFlightById(flightId);
+        if (flight.isPresent()) {
+            return ResponseEntity.ok(flight);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Display a specific flight
     @GetMapping(value = "/{id}")
     public ResponseEntity<Flight> getFlightById(@PathVariable Long id){
@@ -37,17 +50,12 @@ public class FlightController {
 
     // Add details of a new flight
     @PostMapping
-    public ResponseEntity<Flight> addNewFlight(@RequestBody Flight flight){
+    public ResponseEntity<Flight> updateFlight(@RequestBody Flight flight){
         Flight newFlight = flightService.addFlight(flight);
         return new ResponseEntity<>(newFlight, HttpStatus.CREATED);
     }
 
 
 
-    // Extension - Cancel flight
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity deleteFlight(@PathVariable Long id){
-        flightService.deleteFlight(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+
 }

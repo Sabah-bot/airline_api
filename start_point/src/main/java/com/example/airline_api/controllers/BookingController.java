@@ -21,19 +21,6 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    // Display all bookings
-    @GetMapping
-    public ResponseEntity<List<Booking>> getAllBookings(){
-        List<Booking> bookings = bookingService.getAllBookings();
-        return new ResponseEntity<>(bookings, HttpStatus.OK);
-    }
-
-    // Add details of a new booking
-    @PostMapping
-    public ResponseEntity<Booking> addNewBooking(@RequestBody Booking booking){
-        Booking newBooking = bookingService.saveBooking(booking);
-        return new ResponseEntity<>(newBooking, HttpStatus.CREATED);
-    }
 
     // Book passenger on a flight
     @PatchMapping(value = "/{flightId}/passengers/{passengerId}")
@@ -50,17 +37,5 @@ public class BookingController {
         return new ResponseEntity<>(updatedBooking, HttpStatus.OK);
     }
 
-    // Extension: Update passenger meal preference
-    @PatchMapping("/{id}/mealPreference")
-    public ResponseEntity<Booking> updateMealPreference(@PathVariable Long id, @RequestBody String mealPreference){
-        Optional<Booking> bookingOptional = bookingService.getBookingById(id);
-        if (!bookingOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
-        Booking booking = bookingOptional.get();
-        booking.setMealPreference(mealPreference);
-        Booking updatedBooking = bookingService.saveBooking(booking);
-        return new ResponseEntity<>(updatedBooking, HttpStatus.OK);
-    }
 }

@@ -1,5 +1,10 @@
 package com.example.airline_api.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+
+import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -24,6 +29,9 @@ public class Booking {
     @Column
     private String mealPreference;
 
+    @OneToMany(mappedBy = "booking") // MODIFIED
+    @JsonIgnoreProperties({"booking"})
+    private List<Booking> bookings; // MODIFIED
 
     public Booking(){
 
@@ -59,6 +67,7 @@ public class Booking {
         return passenger;
     }
 
+
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
     }
@@ -70,7 +79,6 @@ public class Booking {
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
-
     public String getMealPreference() {
         return mealPreference;
     }
@@ -84,4 +92,47 @@ public class Booking {
 
     public void setPassengerId(Long passengerId) {
     }
+
+
+
+    public List<Booking> getAllBookings() {
+        List<Booking> booking;
+        return getAllBookings();
+    }
+
+    public List<Booking> addNewBooking() {
+        List<Booking> booking;
+        return addNewBooking();
+    }
+
+    public Booking addPassengerToFlight(Long bookingId, Long passengerId) {
+        Optional<Booking> bookingOptional = getBookingById();
+        if (bookingOptional.isPresent()) {
+            Booking booking = bookingOptional.get();
+            booking.setPassengerId(passengerId);
+            return saveBooking();
+        }
+        return null; // or throw an exception
+    }
+
+    private Booking saveBooking() {
+        return saveBooking();
+
+    }
+
+    private Optional<Booking> getBookingById() {
+        return getBookingById();
+    }
+
+
+    public Booking updateMealPreference(Long bookingId, String mealPreference) {
+        Optional<Booking> bookingOptional = getBookingById();
+        if (bookingOptional.isPresent()) {
+            Booking booking = bookingOptional.get();
+            booking.setMealPreference(mealPreference);
+            return saveBooking();
+        }
+        return null; // or throw an exception
+    }
+
 }

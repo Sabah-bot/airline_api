@@ -43,10 +43,6 @@ public class FlightService {
 
     }
 
-    public Flight addPassengerToFlight(Long flightId, Long passengerId) {
-        return null;
-    }
-
     public void saveFlight(Flight flight1) {
     }
 }

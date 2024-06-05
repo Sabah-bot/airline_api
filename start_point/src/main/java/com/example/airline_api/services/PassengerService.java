@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class PassengerService {
@@ -20,11 +20,7 @@ public class PassengerService {
     @Autowired
     private FlightRepository flightRepository;
 
-    @Transactional
-    public Passenger addPassenger(String name, String contact) {
-        Passenger passenger = new Passenger(name, contact);
-        return passengerRepository.save(passenger);
-    }
+
 
     @Transactional
     public List<Passenger> getAllPassengers() {
@@ -36,36 +32,6 @@ public class PassengerService {
         return passengerRepository.findById(id).get();
     }
 
-    @Transactional
-    public void bookPassengerOnFlight(Long passengerId, Long flightId) {
-        Optional<Passenger> optionalPassenger = passengerRepository.findById(passengerId);
-        Optional<Flight> optionalFlight = flightRepository.findById(flightId);
-
-        if (optionalPassenger.isPresent() && optionalFlight.isPresent()) {
-            Passenger passenger = optionalPassenger.get();
-            Flight flight = optionalFlight.get();
-            passenger.addFlight(flight);
-            passengerRepository.save(passenger);
-        }
-    }
-
-    @Transactional
-    public void cancelFlightForPassenger(Long passengerId, Long flightId) {
-        Optional<Passenger> optionalPassenger = passengerRepository.findById(passengerId);
-        Optional<Flight> optionalFlight = flightRepository.findById(flightId);
-
-        if (optionalPassenger.isPresent() && optionalFlight.isPresent()) {
-            Passenger passenger = optionalPassenger.get();
-            Flight flight = optionalFlight.get();
-            passenger.removeFlight(flight);
-            passengerRepository.save(passenger);
-        }
-    }
-
-    @Transactional
-    public void deletePassenger(Long id) {
-        passengerRepository.deleteById(id);
-    }
 
     public Passenger addPassenger(Passenger passenger) {
         return passenger;

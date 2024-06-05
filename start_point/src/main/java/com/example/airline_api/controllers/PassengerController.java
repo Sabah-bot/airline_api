@@ -18,6 +18,7 @@ public class PassengerController {
 
 
     // Display details of all passengers
+
     @GetMapping
     public ResponseEntity<List<Passenger>> getAllPassengers(){
         List<Passenger> passengers = passengerService.getAllPassengers();
@@ -31,10 +32,14 @@ public class PassengerController {
     }
 
     // Add a new passenger
+
+
     @PostMapping
-    public ResponseEntity<Passenger> addNewPassenger(@RequestBody Passenger passenger){
+    public ResponseEntity<Passenger> addPassenger(@RequestBody Passenger passenger){
         Passenger newPassenger = passengerService.addPassenger(passenger);
         return new ResponseEntity<>(newPassenger, HttpStatus.CREATED);
     }
+
+
 
 }
