@@ -29,9 +29,10 @@ public class Booking {
     @Column
     private String mealPreference;
 
-    @OneToMany(mappedBy = "booking") // MODIFIED
+    @OneToMany(mappedBy = "booking") // Modified mappedBy to match property name
     @JsonIgnoreProperties({"booking"})
-    private List<Booking> bookings; // MODIFIED
+    private List<Booking> bookings; // Modified property name to match mappedBy
+
 
     public Booking(){
 
