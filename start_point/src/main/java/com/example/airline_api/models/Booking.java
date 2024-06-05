@@ -29,14 +29,14 @@ public class Booking {
     @Column
     private String mealPreference;
 
+    public Booking(){
+
+    }
     @OneToMany(mappedBy = "booking") // Modified mappedBy to match property name
     @JsonIgnoreProperties({"booking"})
     private List<Booking> bookings; // Modified property name to match mappedBy
 
 
-    public Booking(){
-
-    }
 
     public Booking(int seatNumber, String mealPreference, Passenger passenger, int flight) {
         this.seatNumber = seatNumber;
