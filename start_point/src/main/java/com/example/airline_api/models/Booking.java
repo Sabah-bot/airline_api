@@ -110,7 +110,7 @@ public class Booking {
         return addNewBooking();
     }
 
-    public Booking addPassengerToFlight(Long bookingId, Long passengerId) {
+    public Booking addPassengerToFlight(Long passengerId) {
         Optional<Booking> bookingOptional = getBookingById();
         if (bookingOptional.isPresent()) {
             Booking booking = bookingOptional.get();
@@ -130,14 +130,5 @@ public class Booking {
     }
 
 
-    public Booking updateMealPreference(Long bookingId, String mealPreference) {
-        Optional<Booking> bookingOptional = getBookingById();
-        if (bookingOptional.isPresent()) {
-            Booking booking = bookingOptional.get();
-            booking.setMealPreference(mealPreference);
-            return saveBooking();
-        }
-        return null; // or throw an exception
-    }
 
 }
