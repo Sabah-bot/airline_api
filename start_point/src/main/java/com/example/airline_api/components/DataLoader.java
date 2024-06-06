@@ -38,30 +38,7 @@ public class DataLoader implements ApplicationRunner {
         Flight flight3 = new Flight("Kuala Lumpar", 180, LocalDate.of(2024, 9, 10), LocalTime.of(16, 00));
         flightService.saveFlight(flight3);
 
-        // Create Passengers
-        Passenger passenger1 = new Passenger("John Lockers", "john.doe@example.com");
-        passengerService.savePassenger(passenger1);
 
-        Passenger passenger2 = new Passenger("Jane Cheevers", "jane.smith@example.com");
-        passengerService.savePassenger(passenger2);
-
-        Passenger passenger3 = new Passenger("Sabrina Dondon", "alice.johnson@example.com");
-        passengerService.savePassenger(passenger3);
-
-        // Create Bookings
-        Booking booking1 = new Booking(12, "Vegetarian", passenger1, 3);
-        bookingRepository.save(booking1);
-
-        Booking booking2 = new Booking(14, "Halal", passenger2, 4);
-        bookingRepository.save(booking2);
-
-        Booking booking3 = new Booking(6, "Vegan", passenger3, 2);
-        bookingRepository.save(booking3);
-
-        Booking booking4 = new Booking(5, "Gluten-Free", passenger1, 2);
-        bookingRepository.save(booking4);
-
-        Booking booking5 = new Booking(56, "Halal", passenger2, 2);
-        bookingRepository.save(booking5);
     }
+
 }

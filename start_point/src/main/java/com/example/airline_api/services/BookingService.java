@@ -33,21 +33,16 @@ public class BookingService {
         return bookingRepository.findById(id);
     }
 
-    public List<Booking> getBookingsByPassengerId(Long passengerId) {
-        Passenger passenger = passengerRepository.findById(passengerId)
-                .orElseThrow(() -> new RuntimeException("Passenger not found"));
-        return bookingRepository.findByPassenger(passenger);
+    public List<Booking> addPassengerToFlight(Long passengerId) {
+        return bookingRepository.findAll();
     }
 
-    public List<Booking> getBookingsByFlightId(Long flightId) {
-        return bookingRepository.findByFlightId(flightId);
-    }
 
-    public Booking saveBooking(Booking booking) {
+    public Booking addNewBooking(Booking booking) {
         return bookingRepository.save(booking);
     }
 
-    public void deleteBooking(Long id) {
+    public void saveBooking(Long id) {
         bookingRepository.deleteById(id);
     }
 }
