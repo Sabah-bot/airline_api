@@ -1,54 +1,28 @@
 package com.example.airline_api.services;
+
 import com.example.airline_api.models.Flight;
-import com.example.airline_api.models.Passenger;
-import com.example.airline_api.repositories.BookingRepository;
 import com.example.airline_api.repositories.FlightRepository;
-import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FlightService {
 
-
     @Autowired
-    private PassengerRepository passengerRepository;
+    FlightRepository flightRepository;
 
-    @Autowired
-    private FlightRepository flightRepository;
-
-    @Autowired
-    private BookingRepository bookingRepository;
-
-
-    @Transactional
-    public Flight addFlight(Flight flight) {
-        return flightRepository.save(flight);
-    }
-
-    @Transactional
-    public List<Flight> getAllFlights() {
+    public List<Flight> getAllFlights(){
         return flightRepository.findAll();
     }
 
-    @Transactional
-    public Optional<Flight> getFlightById(Long id) {
-        return flightRepository.findById(id);
+    public Flight getFlightById(long id){
+        return flightRepository.findById(id).get();
     }
 
-    @Transactional
-    public Flight updateFlight(Flight flight) {
-        return flightRepository.save(flight);
-    }
-
-    public void deleteFlight(Long id) {
-
-    }
-
-    public void saveFlight(Flight flight1) {
+    public Flight addNewFlight(Flight flight){
+        flightRepository.save(flight);
+        return flight;
     }
 }

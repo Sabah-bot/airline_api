@@ -1,30 +1,25 @@
 package com.example.airline_api.models;
 
-import com.example.airline_api.repositories.BookingRepository;
-
 public class BookingDTO {
 
-    private long flightID;
-
+    private long flightId;
     private long passengerId;
 
-
-    public BookingDTO(long flightID, long passengerId){
-
+    public BookingDTO(long flightId, long passengerId){
+        this.flightId = flightId;
+        this.passengerId = passengerId;
     }
-
 
     public BookingDTO(){
 
     }
 
-
-    public long getFlightID() {
-        return flightID;
+    public long getFlightId() {
+        return flightId;
     }
 
-    public void setFlightID(long flightID) {
-        this.flightID = flightID;
+    public void setFlightId(long flightId) {
+        this.flightId = flightId;
     }
 
     public long getPassengerId() {

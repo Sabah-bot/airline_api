@@ -1,8 +1,6 @@
 package com.example.airline_api.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
-
 import java.util.List;
 import java.util.Optional;
 
@@ -11,44 +9,35 @@ import java.util.Optional;
 @Table(name = "booking")
 public class Booking {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private long id;
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    @JsonIgnoreProperties({"bookings"})
+    private Flight flight;
 
-    @Column (name = "seat_number")
-    private int seatNumber;
-
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "passenger_id")
+    @JsonIgnoreProperties({"bookings"})
     private Passenger passenger;
 
-    @Column
-    private int flight;
-
-    @Column (name = "meal_Preference")
+    @Column(name = "seat_number")
+    private int seatNumber;
+    @Column(name = "meal_preference")
     private String mealPreference;
+
+    public Booking(Flight flight, Passenger passenger, int seatNumber) {
+        this.flight = flight;
+        this.passenger = passenger;
+        this.seatNumber = seatNumber;
+        this.mealPreference = "Standard Meal";
+    }
+
 
     public Booking(){
 
     }
-
-    @OneToMany
-    @JoinColumn(name = "passenger_id") // Modified mappedBy to match property name
-    @JsonIgnoreProperties({"booking"})
-
-
-    private List<Booking> bookings; // Modified property name to match mappedBy
-
-
-
-    public Booking(int seatNumber, String mealPreference, Passenger passenger, int flight) {
-        this.seatNumber = seatNumber;
-        this.mealPreference = mealPreference;
-        this.passenger =  passenger;
-        this.flight = flight;
-    }
-
 
 //    GETTERS AND SETTERS
 
@@ -60,12 +49,12 @@ public class Booking {
         this.id = id;
     }
 
-    public int getFlight() {
+    public Flight getFlight() {
         return flight;
     }
 
     public void setFlight(Flight flight) {
-        this.flight = flight.getCapacity();
+        this.flight = flight;
     }
 
     public Passenger getPassenger() {
@@ -90,43 +79,6 @@ public class Booking {
 
     public void setMealPreference(String mealPreference) {
         this.mealPreference = mealPreference;
-    }
-
-    public void setFlightId(Long flightId) {
-    }
-
-    public void setPassengerId(Long passengerId) {
-    }
-
-
-
-    public List<Booking> getAllBookings() {
-        List<Booking> booking;
-        return getAllBookings();
-    }
-
-    public List<Booking> addNewBooking() {
-        List<Booking> booking;
-        return addNewBooking();
-    }
-
-    public Booking addPassengerToFlight(Long passengerId) {
-        Optional<Booking> bookingOptional = getBookingById();
-        if (bookingOptional.isPresent()) {
-            Booking booking = bookingOptional.get();
-            booking.setPassengerId(passengerId);
-            return saveBooking();
-        }
-        return null; // or throw an exception
-    }
-
-    private Booking saveBooking() {
-        return saveBooking();
-
-    }
-
-    private Optional<Booking> getBookingById() {
-        return getBookingById();
     }
 
 

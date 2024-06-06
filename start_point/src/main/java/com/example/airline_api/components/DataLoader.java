@@ -1,9 +1,7 @@
 package com.example.airline_api.components;
 
-import com.example.airline_api.models.Booking;
 import com.example.airline_api.models.Flight;
 import com.example.airline_api.models.Passenger;
-import com.example.airline_api.repositories.BookingRepository;
 import com.example.airline_api.services.FlightService;
 import com.example.airline_api.services.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +21,29 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     PassengerService passengerService;
 
-    @Autowired
-    BookingRepository bookingRepository;
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // Create Flights
-        Flight flight1 = new Flight("Singapore", 200, LocalDate.of(2024, 7, 20), LocalTime.of(14, 30));
-        flightService.saveFlight(flight1);
 
-        Flight flight2 = new Flight("London", 150, LocalDate.of(2024, 8, 15), LocalTime.of(9, 45));
-        flightService.saveFlight(flight2);
+        Flight singapore = new Flight("Singapore", 400, "2024-02-14", "08:00:00");
+        flightService.addNewFlight(singapore);
 
-        Flight flight3 = new Flight("Kuala Lumpar", 180, LocalDate.of(2024, 9, 10), LocalTime.of(16, 00));
-        flightService.saveFlight(flight3);
+        Flight Mumbai = new Flight("Mumbai", 250, "2024-05-21", "16:30:00");
+        flightService.addNewFlight(Mumbai);
 
+        Flight New_York = new Flight("NYC", 200, "2024-08-24", "23:00:00");
+        flightService.addNewFlight(New_York);
+
+        Passenger Sabrina = new Passenger("Sabrina", "Sabrina-emails@youcanseethis.co.uk");
+        passengerService.addNewPassenger(Sabrina);
+
+        Passenger Gracie = new Passenger("Gracie", "gracie@missme.co.uk");
+        passengerService.addNewPassenger(Gracie);
+
+        Passenger olivia = new Passenger("Olivia", "Olivia@driverslicense.co.uk");
+        passengerService.addNewPassenger(olivia);
+
+        Passenger conan = new Passenger("Conan", "conan@healthersweatshirtcryingclub.co.uk");
+        passengerService.addNewPassenger(conan);
 
     }
-
 }
