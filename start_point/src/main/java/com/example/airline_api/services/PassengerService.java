@@ -2,6 +2,7 @@ package com.example.airline_api.services;
 
 import com.example.airline_api.models.Flight;
 import com.example.airline_api.models.Passenger;
+import com.example.airline_api.repositories.BookingRepository;
 import com.example.airline_api.repositories.FlightRepository;
 import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,16 @@ public class PassengerService {
     @Autowired
     private FlightRepository flightRepository;
 
+    @Autowired
+    private BookingRepository bookingRepository;
 
 
-    @Transactional
+
     public List<Passenger> getAllPassengers() {
         return passengerRepository.findAll();
     }
 
-    @Transactional
+
     public Passenger getPassengerById(Long id) {
         return passengerRepository.findById(id).get();
     }
@@ -37,7 +40,7 @@ public class PassengerService {
         return passenger;
     }
 
-    @Transactional
+
     public Passenger savePassenger(Passenger passenger) {
         return passengerRepository.save(passenger);
     }

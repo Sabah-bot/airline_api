@@ -17,7 +17,7 @@ public class Booking {
     @Column
     private long id;
 
-    @Column
+    @Column (name = "seat_number")
     private int seatNumber;
 
     @Column
@@ -26,14 +26,18 @@ public class Booking {
     @Column
     private int flight;
 
-    @Column
+    @Column (name = "meal_Preference")
     private String mealPreference;
 
     public Booking(){
 
     }
-    @OneToMany(mappedBy = "booking") // Modified mappedBy to match property name
+
+    @OneToMany
+    @JoinColumn(name = "passenger_id") // Modified mappedBy to match property name
     @JsonIgnoreProperties({"booking"})
+
+
     private List<Booking> bookings; // Modified property name to match mappedBy
 
 

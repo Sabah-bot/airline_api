@@ -14,15 +14,15 @@ import java.util.List;
 public class PassengerController {
 
     @Autowired
-    private PassengerService passengerService;
+    PassengerService passengerService;
 
 
     // Display details of all passengers
 
     @GetMapping
     public ResponseEntity<List<Passenger>> getAllPassengers(){
-        List<Passenger> passengers = passengerService.getAllPassengers();
-        return new ResponseEntity<>(passengers, HttpStatus.OK);
+        List<Passenger> allPassengers = passengerService.getAllPassengers();
+        return new ResponseEntity<>(allPassengers, HttpStatus.OK);
     }
 
     // Display specific passenger details

@@ -20,12 +20,19 @@ public class Passenger {
     @Column(name = "emailAddress")
     private String email;
 
-    @ManyToMany(mappedBy = "passengers")
-    @JsonIgnoreProperties("passengers")
-    private List<Flight> flights = new ArrayList<>();
+    @ManyToMany(mappedBy = "passenger")
+    @JsonIgnoreProperties("passenger")
+    private List<Booking> bookings = new ArrayList<>();
+    private List<Flight> flights;
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
 
-    // Constructors, getters, and setters
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+// Constructors, getters, and setters
 
     public Passenger() {
     }
@@ -33,6 +40,7 @@ public class Passenger {
     public Passenger(String name, String email) {
         this.name = name;
         this.email = email;
+        this.bookings = new ArrayList<>();
     }
 
     // Getters and setters

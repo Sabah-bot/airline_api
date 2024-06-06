@@ -1,6 +1,7 @@
 package com.example.airline_api.services;
 import com.example.airline_api.models.Flight;
 import com.example.airline_api.models.Passenger;
+import com.example.airline_api.repositories.BookingRepository;
 import com.example.airline_api.repositories.FlightRepository;
 import com.example.airline_api.repositories.PassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,16 @@ import java.util.Optional;
 @Service
 public class FlightService {
 
+
+    @Autowired
+    private PassengerRepository passengerRepository;
+
     @Autowired
     private FlightRepository flightRepository;
 
     @Autowired
-    private PassengerRepository passengerRepository;
+    private BookingRepository bookingRepository;
+
 
     @Transactional
     public Flight addFlight(Flight flight) {

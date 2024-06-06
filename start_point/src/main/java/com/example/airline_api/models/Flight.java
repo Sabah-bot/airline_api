@@ -3,6 +3,7 @@ package com.example.airline_api.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.awt.print.Book;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -22,21 +23,22 @@ public class Flight {
     @Column
     private int capacity;
 
-    @Column
+    @Column(name ="departure_date")
     private String departureDate;
 
-    @Column
+    @Column(name = "departure_time")
     private String departureTime;
 
-    @ManyToMany(mappedBy = "flights")
-    @JsonIgnoreProperties("flights")
-    private List<Passenger> passengers = new ArrayList<>();
+    @OneToMany(mappedBy = "flight")
+    @JsonIgnoreProperties("flight")
+    private List<Booking> bookings = new ArrayList<>();
 
     public Flight(String destination, int capacity, LocalDate departureDate, LocalTime departureTime) {
         this.destination = destination;
         this.capacity = capacity;
         this.departureDate = String.valueOf(departureDate);
         this.departureTime = String.valueOf(departureTime);
+        this.bookings = getBookings();
     }
 
     public Flight() {
@@ -85,6 +87,11 @@ public class Flight {
         this.departureTime = departureTime;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
 
-
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 }

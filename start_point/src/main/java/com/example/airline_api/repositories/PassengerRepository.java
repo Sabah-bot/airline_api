@@ -9,8 +9,5 @@ import java.util.List;
 @Repository
 public interface PassengerRepository extends JpaRepository<Passenger, Long>{
 
-    List<Passenger> findAll(); // Display details of all passengers
-
-    Passenger findById(long id); // Display a specific passenger
 
 }
